@@ -1,0 +1,17 @@
+{
+  "name": "trading-app",
+  "version": "0.1.0",
+  "description": "Demo of trading",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "trading"
+  ],
+  "author": "peng.zhang",
+  "license": "ISC",
+  "dependencies": {
+    
+  }
+}
