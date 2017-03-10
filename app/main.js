@@ -29,7 +29,7 @@ app.on('ready', function() {
 
   // and load the index.html of the app.
   var url = 'file://' + __dirname + '/index.html';
-  
+  // url ='http://login.taobao.com/member/login.jhtml?style=mini&newMini2=true&css_style=alimama&from=alimama&redirectURL=http%3A%2F%2Fwww.alimama.com&full_redirect=true&disableQuickLogin=true';
   svc.createWidonw(url);
   var w =svc.getWebContent();
   // Open the DevTools.
@@ -56,5 +56,6 @@ app.on('ready', function() {
 
 ipcMain.regServer({
   'get_ses':ipcFun.onWindowChange,
-  'getOs':ipcFun.onGetOsInfo
+  'getOs':ipcFun.onGetOsInfo,
+  'openWindow':ipcFun.onOpenWindw,
 })

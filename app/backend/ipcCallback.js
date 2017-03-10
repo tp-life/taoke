@@ -1,19 +1,21 @@
 
+const electron = require('electron');
+const BrowserWindow = electron.BrowserWindow;
 const session = require('./session');
-
 module.exports = {
+    //窗口内容发生变化
     onWindowChange: function (event, arg) {
         session.getToken();
-        event.sender.send('revc', global.cookies)
     },
-
-    onGetSession: function () {
+    //获取cookie
+    onGetSession: function (event) {
         if (global.cookies.length < 1) {
             this.onWindowChange();
         }
+        event.sender.send('revc', global.cookies)
         return global.cookies;
     },
-
+    //获取系统信息
     onGetOsInfo: function (event, arg) {
         var os = require('os');
         var osInfo = {
@@ -41,5 +43,39 @@ module.exports = {
             uptime: os.uptime()
         };
         event.sender.send('onRecv_getOs', osInfo);
+    },
+    //打开新的窗口
+    onOpenWindw: function (event, a) {
+        if (a && a.url) {
+            var win = new BrowserWindow({
+                width: a.w, height: a.h,
+                autoHideMenuBar: true,
+                maxWidth: 1200,
+                maxHeight: 800,
+                resizable: false,
+                maximizable: false,
+                title: '',
+                minimizable: false,
+                allowDisplayingInsecureContent: true,
+                alwaysOnTop: true
+            })
+            win.loadURL(a.url);
+        }
+      
+    },
+    openLogin:function(event, a){
+        var win = new BrowserWindow({
+                width: a.w, height: a.h,
+                autoHideMenuBar: true,
+                maxWidth: 1200,
+                maxHeight: 800,
+                resizable: false,
+                maximizable: false,
+                title: '',
+                minimizable: false,
+                allowDisplayingInsecureContent: true,
+                alwaysOnTop: true
+            })
+            win.loadURL('file://'+__dirname+'/../ui/login.html');
     }
 };
